@@ -27,9 +27,8 @@ function App() {
     }
   })
 
-
   createEffect(() => {
-    renderer.console.show();
+    //renderer.console.show();
     console.log(fileState());
     console.log(appState());
   });
