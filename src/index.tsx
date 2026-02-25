@@ -28,11 +28,10 @@ function App() {
   })
 
   createEffect(() => {
-    //renderer.console.show();
+    renderer.console.show();
     console.log(fileState());
     console.log(appState());
   });
-
 
   return (
     <StateContext.Provider value={[appState, setAppState]}>
@@ -42,7 +41,7 @@ function App() {
             <ascii_font text="QUIZTUI" />
             <box>
               <text>n. create new set</text>
-              <text>o. open set</text>
+              <text>o. manage sets</text>
             </box>
           </box >
         </Show >
