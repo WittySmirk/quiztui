@@ -5,10 +5,14 @@ import MainSet from "./components/mainset";
 import OpenSet from "./components/openset";
 import CreateSet from "./components/createset";
 
-type state = "menu" | "creating" | "opening" | "main";
+type state = "menu" | "creating" | "opening" | "main" | "editing";
+interface File {
+  title: string,
+  cards: [[string]],
+}
 
-export const FileContext = createContext();
-export const StateContext = createContext();
+export const FileContext = createContext<File>();
+export const StateContext = createContext<state>();
 
 function App() {
   const [appState, setAppState] = createSignal<state>("menu");
@@ -52,7 +56,10 @@ function App() {
           <OpenSet />
         </Show>
         <Show when={appState() == "creating"}>
-          <CreateSet />
+          <CreateSet edit={false} />
+        </Show>
+        <Show when={appState() == "editing"}>
+          <CreateSet edit={true} />
         </Show>
       </FileContext.Provider>
     </StateContext.Provider>

@@ -1,6 +1,6 @@
 import { useKeyboard, useRenderer, useTerminalDimensions } from "@opentui/solid";
 import { createSignal, onMount, useContext } from "solid-js";
-import { FileContext } from "../index";
+import { StateContext, FileContext } from "../index";
 
 function MainSet() {
   const [title, setTitle] = createSignal<string>("")
@@ -9,6 +9,7 @@ function MainSet() {
   const [cardsi, setCardsi] = createSignal<number>(0);
   const [cardi, setCardi] = createSignal<number>(0);
   const dimensions = useTerminalDimensions();
+  const [appState, setAppState] = useContext(StateContext);
   const [fileState, setFileState] = useContext(FileContext);
 
   onMount(async () => {
@@ -46,6 +47,9 @@ function MainSet() {
       setTitle(j.title)
       setCards(j.cards)
     }
+    if (key.shift && key.name == "e") {
+      setAppState("editing");
+    }
   })
   return (
     <box alignItems="center" justifyContent="center" flexGrow={1} >
@@ -54,7 +58,7 @@ function MainSet() {
         <ascii_font text={cards()[cardsi()]![cardi()]} />
       </box>
       <box>
-        <text>h previous | l next | space flip</text>
+        <text>h previous | l next | space flip | E edit set</text>
       </box>
     </box >
   );

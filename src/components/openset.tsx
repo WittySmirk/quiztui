@@ -35,6 +35,7 @@ function OpenSet() {
     if (key.name === "return") {
       //console.log(files()[i()]);
       if (renaming()) {
+        const f = Bun.file("sets/" + files()[i()]);
         return;
       }
       const f = Bun.file("sets/" + files()[i()]);
@@ -63,7 +64,7 @@ function OpenSet() {
             <Show when={renaming()} fallback={
               <text fg="#FFEE8C"><strong>{"> " + file}</strong></text>
             }>
-              <input textColor="#FFEE8C" focused={true} value={file}></input>
+              <input textColor="#FFEE8C" focused={true} value={file} />
             </Show>
           </Show>
         )}

@@ -4,8 +4,8 @@ import { createSignal, createEffect, Show } from "solid-js";
 import type { Accessor } from "solid-js";
 import type { InputRenderable, SubmitEvent, InputRenderableEvents } from "@opentui/core";
 
-function BetterInput(props: { ascii?: boolean, onSubmit?: (event: SubmitEvent) => void, label?: string, ref: (el: InputRenderable) => void, index: number, i: Accessor<number> }) {
-  const [value, setValue] = createSignal<string>("");
+function BetterInput(props: { ascii?: boolean, onSubmit?: (event: SubmitEvent) => void, label?: string, ref: (el: InputRenderable) => void, index: number, i: Accessor<number>, default: string }) {
+  const [value, setValue] = createSignal<string>(props.default);
   return (
     <>
       <input ref={props.ref} visible={false} onInput={(v) => setValue(v)} onSubmit={props.onSubmit} />
