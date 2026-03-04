@@ -3,7 +3,6 @@ import { createSignal, onMount, For, Show, useContext } from "solid-js";
 import { readdir } from "node:fs/promises"
 import { FileContext, StateContext } from "../index";
 
-
 function OpenSet() {
   const [files, setFiles] = createSignal<string[]>([""]);
   const [i, setI] = createSignal<number>(0);
