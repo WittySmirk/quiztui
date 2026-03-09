@@ -24,43 +24,45 @@ function MainSet() {
   })
 
   useKeyboard(async (key) => {
-    if (key.name === "space") {
-      if (cardi() == 0) {
-        setCardi(1);
-      } else {
-        setCardi(0);
+    if (mode() === "flashcard") {
+      if (key.name === "space") {
+        if (cardi() == 0) {
+          setCardi(1);
+        } else {
+          setCardi(0);
+        }
       }
-    }
-    if (key.name === "l") {
-      if (cardsi() < cards().length - 1) {
-        setCardsi((c) => c + 1)
+      if (key.name === "l") {
+        if (cardsi() < cards().length - 1) {
+          setCardsi((c) => c + 1)
+        }
+        setCardi(0)
       }
-      setCardi(0)
-    }
-    if (key.name === "h") {
-      if (cardsi() > 0) {
-        setCardsi((c) => c - 1)
+      if (key.name === "h") {
+        if (cardsi() > 0) {
+          setCardsi((c) => c - 1)
+        }
+        setCardi(0)
       }
-      setCardi(0)
-    }
-    if (key.name === "c") {
-      renderer.console.toggle();
-    }
-    if (key.name === "m") {
-      setMode("match");
-    }
-    if (key.name === "g") {
-      setMode("gravity");
-    }
-    // Debug only
-    if (key.name === "r") {
-      const f = Bun.file("test.json")
-      const j = await f.json();
-      setTitle(j.title)
-      setCards(j.cards)
-    }
-    if (key.shift && key.name == "e") {
-      setAppState("editing");
+      if (key.name === "c") {
+        renderer.console.toggle();
+      }
+      if (key.name === "m") {
+        setMode("match");
+      }
+      if (key.name === "g") {
+        setMode("gravity");
+      }
+      // Debug only
+      if (key.name === "r") {
+        const f = Bun.file("test.json")
+        const j = await f.json();
+        setTitle(j.title)
+        setCards(j.cards)
+      }
+      if (key.shift && key.name == "e") {
+        setAppState("editing");
+      }
     }
   })
   return (
@@ -75,7 +77,9 @@ function MainSet() {
         </box>
       </Show>
       <Show when={mode() == "match"}>
-        <Match />
+        <box position="absolute" left={0} top={0} shouldFill={true} backgroundColor="black">
+          <Match />
+        </box>
       </Show>
       <Show when={mode() == "gravity"}>
         <text>gravity</text>

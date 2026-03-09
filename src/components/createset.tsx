@@ -21,11 +21,11 @@ function CreateSet(props: { edit: boolean }) {
       inputs[0]!.value = fileState().title;
 
       setTerms([]);
-      fileState().cards.map((c: [string, string], i) => {
+      fileState().cards.map((c: [string, string], i: number) => {
         if (i == 0) {
           setTerms([{ n: 1, d: c }]);
         }
-        setTerms(t => [...t, { n: t[t.length - 1]!.n + 2, d: c }]);
+        setTerms(t => [...t, { n: t[t.length - 1]!.n + 2, d: c }]); //TODO: maybe add else?
       });
     }
   });
